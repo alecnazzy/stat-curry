@@ -4,43 +4,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <title>NBApi index</title>
+    <title>index</title>
+
+    {% load static %}
+
+    <link rel="stylesheet" href="{% static 'index.css' %}">
+
 </head>
 <body>
     {% block content %}
 
-    <h1>NBApi is a website that displays NBA stats for the 2022-23 regular season.</h1>
+    <h3 class="description">All the data from the 2022-23 NBA regular season, easily accessible through a RESTful API</h3>
 
-    <!-- <ul>
-        {% for stat in stats %}
-            <li>{{ stat }}</li>
-        {% endfor %}
-    </ul> -->
-
-    <script>
-        URL = 'http://127.0.0.1:8000/api/stats/';
-        async function getStats() {
-            const response = await fetch(URL);
-            const data = await response.json();
-            console.log(data);
-            document.getElementById('stats').innerHTML = JSON.stringify(data, null, 2);
-        }
-        getStats();
-    </script>
-
-<div style="height:500px;width:600px;border:1px solid #ccc;font:16px/26px Georgia, Garamond, Serif;overflow:auto;">
-    <pre id="stats">
-    </pre>
-</div>
+    <h1 class="description">Try it out: </h1>
+    <div class="API-input-container">
+        <h3 class="search">http://127.0.0.1:8000/api/</h3>
+        <input id="searchField" name="search" type="text" value="stats/Stephen Curry">
+            <button id="searchButton" onclick="getStats()">Search</button>
+            <button id="copyButton" onclick="copyToClipboard()">Copy</button>
+            <div id="contentArea"></div>
+        </input>
+    </div>
     
+    <div class="API-container">
+
+        <script>
+            async function getStats() {
+                const _searchField = document.getElementById('searchField');
+                URL = 'http://127.0.0.1:8000/api/'+_searchField.value;
+                const response = await fetch(URL);
+                const data = await response.json();
+                console.log(data);
+                document.getElementById('stats').innerHTML = JSON.stringify(data, null, '\t');
+            }
+            async function copyToClipboard() {
+                var _searchField = document.getElementById("searchField");
+                var copiedURL = 'http://127.0.0.1:8000/api/'+_searchField.value;
+
+                navigator.clipboard.writeText(copiedURL);
+                alert("Copied text: " + copiedURL.toString());
+            }
+            window.onload = function(){
+            document.getElementById('searchButton').click();
+            }
+        </script>
+ 
+        <div class="JSON-container">
+            <pre id="stats"></pre>
+        </div> 
+    </div>
+
 {% endblock content %}
 </body>
 </html>
-
-
-
-
-
-
-
