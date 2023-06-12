@@ -59,7 +59,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'stat_curry.urls'
+ROOT_URLCONF = 'nbapi.urls'
 
 TEMPLATES = [
     {
@@ -77,7 +77,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'stat_curry.wsgi.application'
+WSGI_APPLICATION = 'nbapi.wsgi.application'
 
 
 # Database

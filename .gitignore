@@ -1,3 +1,21 @@
+# environments
+.env 
+.venv 
+/env
+env/ 
+venv/ 
+ENV/ 
+env.bak/ 
+venv.bak/
+
+# vscode
+.vscode/* 
+!.vscode/settings.json 
+!.vscode/tasks.json 
+!.vscode/launch.json 
+!.vscode/extensions.json 
+.history
+
 api\__pycache__
 api\migrations\__pycache__
 base\__pycache__
@@ -10,17 +28,3 @@ db.sqlite3
 media
 *.py[cod] 
 *$py.class 
-.env 
-.venv 
-/env
-env/ 
-venv/ 
-ENV/ 
-env.bak/ 
-venv.bak/
-.vscode/* 
-!.vscode/settings.json 
-!.vscode/tasks.json 
-!.vscode/launch.json 
-!.vscode/extensions.json 
-.history

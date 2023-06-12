@@ -8,15 +8,15 @@ def apiOverview(request):
     """Returns a list of all available endpoints"""
     api_urls = {
         'Stats': '/stats/',
-        'Sort by Scoring': '/scoring/',
-        'Sort by Assists': '/assists/',
-        'Sort by Rebounds': '/rebounds/',
-        'Sort by Steals': '/steals/',
-        'Sort by Blocks': '/blocks/',
-        'Sort by Team': '/team/<str:team>/',
-        'Sort by Player': '/player/<str:name>/',
-        'Sort by Position': '/position/<str:position>/',
-        'Sort by Team Scoring': '/team/<str:team>/scoring/'
+        'Search by Name': '/stats/<str:name>/',
+        'Sort by Team': '/sortby/<str:team>/',
+        'Sort by Team Scoring': '/sortby/<str:team>/scoring/',
+        'Sort by Scoring': '/sortby/scoring/',
+        'Sort by Assists': '/sortby/assists/',
+        'Sort by Rebounds': '/sortby/rebounds/',
+        'Sort by Steals': '/sortby/steals/',
+        'Sort by Blocks': '/sortby/blocks/',
+        'Sort by Position': '/sortby/<str:position>/',
     }
     return Response(api_urls)
 
@@ -30,37 +30,44 @@ def stats(request):
 @api_view(['GET'])
 def sortByScoring(request):
     """Returns all stats in the database sorted by points per game"""
-    scoring = Nba_stats.objects.order_by('ppg').reverse()
-    serializer = StatsSerializer(scoring, many=True)
-    return Response(serializer.data)
+    # scoring = Nba_stats.objects.order_by('ppg').reverse()
+    # serializer = StatsSerializer(scoring, many=True)
+    # return Response(serializer.data)
+    string = Nba_stats.objects.values_list('name', 'team', 'ppg').order_by('ppg').reverse()
+    return Response(string)
 
 @api_view(['GET'])
 def sortByAssists(request):
     """Returns all stats in the database sorted by assists per game"""
-    assists = Nba_stats.objects.order_by('apg').reverse()
-    serializer = StatsSerializer(assists, many=True)
-    return Response(serializer.data)
+    # assists = Nba_stats.objects.order_by('apg').reverse()
+    # serializer = StatsSerializer(assists, many=True)
+    # return Response(serializer.data)
+    string = Nba_stats.objects.values_list('name', 'team', 'apg').order_by('apg').reverse()
+    return Response(string)
 
 @api_view(['GET'])
 def sortByRebounds(request):
     """Returns all stats in the database sorted by rebounds per game"""
-    rebounds = Nba_stats.objects.order_by('rpg').reverse()
-    serializer = StatsSerializer(rebounds, many=True)
-    return Response(serializer.data)
+    string = Nba_stats.objects.values_list('name', 'team', 'rpg').order_by('rpg').reverse()
+    return Response(string)
 
 @api_view(['GET'])
 def sortBySteals(request):
     """Returns all stats in the database sorted by steals per game"""
-    steals = Nba_stats.objects.order_by('spg').reverse()
-    serializer = StatsSerializer(steals, many=True)
-    return Response(serializer.data)
+    # steals = Nba_stats.objects.order_by('spg').reverse()
+    # serializer = StatsSerializer(steals, many=True)
+    # return Response(serializer.data)
+    string = Nba_stats.objects.values_list('name', 'team', 'spg').order_by('spg').reverse()
+    return Response(string)
 
 @api_view(['GET'])
 def sortByBlocks(request):
     """Returns all stats in the database sorted by blocks per game"""
-    blocks = Nba_stats.objects.order_by('bpg').reverse()
-    serializer = StatsSerializer(blocks, many=True)
-    return Response(serializer.data)
+    # blocks = Nba_stats.objects.order_by('bpg').reverse()
+    # serializer = StatsSerializer(blocks, many=True)
+    # return Response(serializer.data)
+    string = Nba_stats.objects.values_list('name', 'team', 'bpg').order_by('bpg').reverse()
+    return Response(string)
 
 @api_view(['GET'])
 def sortByTeam(request, team):
@@ -70,7 +77,7 @@ def sortByTeam(request, team):
     return Response(serializer.data)
 
 @api_view(['GET'])
-def sortByName(request, name):
+def searchByName(request, name):
     """Returns all stats in the database for a given player"""
     name = Nba_stats.objects.filter(name=name)
     serializer = StatsSerializer(name, many=True)
@@ -89,3 +96,4 @@ def sortByTeamScoring(request, team):
     scoring = Nba_stats.objects.filter(team=team).order_by('ppg').reverse()
     serializer = StatsSerializer(scoring, many=True)
     return Response(serializer.data)
+
