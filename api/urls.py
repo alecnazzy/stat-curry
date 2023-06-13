@@ -3,7 +3,11 @@ from . import views
 
 urlpatterns = [
     path('', views.apiOverview, name='apiOverview'),
-    path('stats/', views.stats, name='stats'),
+    path('players/<str:name>/', views.searchPlayer, name='searchPlayer'),
+    path('players/', views.players, name='players'),
+    path('teams/<str:team>/', views.searchTeam, name='searchTeam'),
+    path('teams/', views.teams, name='teams'),
+
     path('sortby/scoring/', views.sortByScoring, name='sortByScoring'),
     path('sortby/assists/', views.sortByAssists, name='sortByAssists'),
     path('sortby/rebounds/', views.sortByRebounds, name='sortByRebounds'),

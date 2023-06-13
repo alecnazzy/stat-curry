@@ -7,8 +7,12 @@ from .serializers import StatsSerializer
 def apiOverview(request):
     """Returns a list of all available endpoints"""
     api_urls = {
-        'Stats': '/stats/',
-        'Search by Name': '/stats/<str:name>/',
+        'List of all players': '/players/',
+        'Search by player': '/players/Stephen Curry/',
+        'List of all teams': '/teams/',
+        'Search by team': '/teams/Golden State Warriors/',
+
+
         'Sort by Team': '/sortby/<str:team>/',
         'Sort by Team Scoring': '/sortby/<str:team>/scoring/',
         'Sort by Scoring': '/sortby/scoring/',
@@ -31,12 +35,40 @@ def apiOverview(request):
     }
     return Response(api_urls)
 
+
+# KEEP
+
 @api_view(['GET'])
-def stats(request):
-    """Returns all stats in the database for the 2022-23 NBA season"""
-    stats = Nba_stats.objects.all()
-    serializer = StatsSerializer(stats, many=True)
+def searchPlayer(request, name):
+    """Returns all stats in the database for a given player"""
+    player = Nba_stats.objects.filter(name=name)
+    serializer = StatsSerializer(player, many=True)
     return Response(serializer.data)
+
+@api_view(['GET'])
+def players(request):
+    """Returns all stats in the database for the 2022-23 NBA season"""
+    players = Nba_stats.objects.order_by('rank')
+    serializer = StatsSerializer(players, many=True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def searchTeam(request, team):
+    """Returns all stats in the database for a given team"""
+    team = Nba_stats.objects.filter(team=team)
+    serializer = StatsSerializer(team, many=True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def teams(request):
+    """Returns all teams in the database"""
+    teams = Nba_stats.objects.values_list('team', flat=True).distinct()
+    return Response(teams)
+
+# END KEEP
+
+
+
 
 @api_view(['GET'])
 def sortByScoring(request):

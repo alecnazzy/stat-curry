@@ -7,19 +7,20 @@
     <title>index</title>
 
     {% load static %}
-
-    <link rel="stylesheet" href="{% static 'index.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'index.css' %}">
 
 </head>
 <body>
     {% block content %}
+<main>
+    <div class="description-container">
+        <h3 class="description">All the data from the 2022-23 NBA regular season, easily accessible through a RESTful API!</h3>
+        <h1 class="description">Try it out: </h1>
+    </div>
 
-    <h3 class="description">All the data from the 2022-23 NBA regular season, easily accessible through a RESTful API</h3>
-
-    <h1 class="description">Try it out: </h1>
     <div class="API-input-container">
-        <h3 class="search">http://127.0.0.1:8000/api/</h3>
-        <input id="searchField" name="search" type="text" value="stats/Stephen Curry">
+        <h4 class="url">http://127.0.0.1:8000/api/</h4>
+        <input id="searchField" name="search" type="text" value="players/Stephen Curry">
             <button id="searchButton" onclick="getStats()">Search</button>
             <button id="copyButton" onclick="copyToClipboard()">Copy</button>
             <div id="contentArea"></div>
@@ -27,7 +28,6 @@
     </div>
     
     <div class="API-container">
-
         <script>
             async function getStats() {
                 const _searchField = document.getElementById('searchField');
@@ -35,7 +35,7 @@
                 const response = await fetch(URL);
                 const data = await response.json();
                 console.log(data);
-                document.getElementById('stats').innerHTML = JSON.stringify(data, null, '\t');
+                document.getElementById('stats').innerHTML = JSON.stringify(data, null, 2);
             }
             async function copyToClipboard() {
                 var _searchField = document.getElementById("searchField");
@@ -53,7 +53,7 @@
             <pre id="stats"></pre>
         </div> 
     </div>
-
+</main>
 {% endblock content %}
 </body>
 </html>
