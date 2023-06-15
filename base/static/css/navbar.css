@@ -6,16 +6,16 @@
     display: flex;
     flex-direction: row;
     font-size: medium;
-    background-color: rgb(255, 54, 54);
+    background-color: rgb(201, 8, 42);
 }
 
-a {
+#nav-link {
     text-decoration: none;
     font-size: x-large;
     font-family: monospace;
     color: white;
     padding: 10px 30px 10px 30px;
 }
-a:hover {
+#nav-link:hover {
     background-color: rgb(228, 50, 50);
 }

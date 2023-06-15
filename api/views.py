@@ -7,31 +7,26 @@ from .serializers import StatsSerializer
 def apiOverview(request):
     """Returns a list of all available endpoints"""
     api_urls = {
-        'List of all players': '/players/',
+        'List of all players': '/players',
         'Search by player': '/players/Stephen Curry/',
-        'List of all teams': '/teams/',
+        'List of all teams': '/teams', 
         'Search by team': '/teams/Golden State Warriors/',
-
-
-        'Sort by Team': '/sortby/<str:team>/',
-        'Sort by Team Scoring': '/sortby/<str:team>/scoring/',
-        'Sort by Scoring': '/sortby/scoring/',
-        'Sort by Assists': '/sortby/assists/',
-        'Sort by Rebounds': '/sortby/rebounds/',
-        'Sort by Steals': '/sortby/steals/',
-        'Sort by Blocks': '/sortby/blocks/',
-        'Sort by Position': '/sortby/<str:position>/',
-        'Sort by Free Throw Attempts': '/sortby/ft/',
-        'Sort by Free Throw Percentage': '/sortby/ft%',
-        'Sort by Three Point Attempts': '/sortby/threepoint/',
-        'Sort by Three Point Percentage': '/sortby/threepoint%',
-        'Sort by Two Point Attempts': '/sortby/twopoint/',
-        'Sort by Two Point Percentage': '/sortby/twopoint%',
-        'Sort by Effective Field Goal Percentage': '/sortby/efg%',
-        'Sort by True Shooting Percentage': '/sortby/ts%',
-        'Sort by Offensive Rating': '/sortby/offrating/',
-        'Sort by Defensive Rating': '/sortby/defrating/',
-        'Sort by Turnovers Per Game': '/sortby/tpg/',
+        'Leaders by points': '/leaders/points',
+        'Leaders by assists': '/leaders/assists',
+        'Leaders by rebounds': '/leaders/rebounds',
+        'Leaders by steals': '/leaders/steals',
+        'Leaders by blocks': '/leaders/blocks',
+        'Leaders by free throw attempts': '/leaders/ft',
+        'Leaders by free throw percentage': '/leaders/ft%',
+        'Leaders by two point attempts': '/leaders/twopoint',
+        'Leaders by two point percentage': '/leaders/twopoint%',
+        'Leaders by three point attempts': '/leaders/threepoint',
+        'Leaders by three point percentage': '/leaders/threepoint%',
+        'Leaders by effective field goal percentage': '/leaders/efg%',
+        'Leaders by true shooting percentage': '/leaders/ts%',
+        'Leaders by offensive rating': '/leaders/offrating',
+        'Leaders by defensive rating': '/leaders/defrating',
+        'Leaders by turnovers': '/leaders/turnovers',
     }
     return Response(api_urls)
 
@@ -48,7 +43,7 @@ def searchPlayer(request, name):
 @api_view(['GET'])
 def players(request):
     """Returns all stats in the database for the 2022-23 NBA season"""
-    players = Nba_stats.objects.order_by('rank')
+    players = Nba_stats.objects.order_by('name')
     serializer = StatsSerializer(players, many=True)
     return Response(serializer.data)
 
@@ -65,146 +60,120 @@ def teams(request):
     teams = Nba_stats.objects.values_list('team', flat=True).distinct()
     return Response(teams)
 
-# END KEEP
-
-
-
-
 @api_view(['GET'])
-def sortByScoring(request):
-    """Returns all stats in the database sorted by points per game"""
-    scoring = Nba_stats.objects.order_by('ppg').reverse()
-    serializer = StatsSerializer(scoring, many=True)
+def leaders(request):
+    """Returns all stats in the database sorted by rank"""
+    leaders = Nba_stats.objects.order_by('rank')
+    serializer = StatsSerializer(leaders, many=True)
     return Response(serializer.data)
 
 @api_view(['GET'])
-def sortByAssists(request):
+def points(request):
+    """Returns all stats in the database sorted by points per game"""
+    points = Nba_stats.objects.order_by('ppg').reverse()
+    serializer = StatsSerializer(points, many=True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def assists(request):
     """Returns all stats in the database sorted by assists per game"""
     assists = Nba_stats.objects.order_by('apg').reverse()
     serializer = StatsSerializer(assists, many=True)
     return Response(serializer.data)
 
 @api_view(['GET'])
-def sortByRebounds(request):
+def rebounds(request):
     """Returns all stats in the database sorted by rebounds per game"""
     rebounds = Nba_stats.objects.order_by('rpg').reverse()
     serializer = StatsSerializer(rebounds, many=True)
     return Response(serializer.data)
 
 @api_view(['GET'])
-def sortBySteals(request):
+def steals(request):
     """Returns all stats in the database sorted by steals per game"""
     steals = Nba_stats.objects.order_by('spg').reverse()
     serializer = StatsSerializer(steals, many=True)
     return Response(serializer.data)
 
 @api_view(['GET'])
-def sortByBlocks(request):
+def blocks(request):
     """Returns all stats in the database sorted by blocks per game"""
     blocks = Nba_stats.objects.order_by('bpg').reverse()
     serializer = StatsSerializer(blocks, many=True)
     return Response(serializer.data)
 
 @api_view(['GET'])
-def sortByTeam(request, team):
-    """Returns all stats in the database for a given team"""
-    team = Nba_stats.objects.filter(team=team)
-    serializer = StatsSerializer(team, many=True)
-    return Response(serializer.data)
-
-@api_view(['GET'])
-def searchByName(request, name):
-    """Returns all stats in the database for a given player"""
-    name = Nba_stats.objects.filter(name=name)
-    serializer = StatsSerializer(name, many=True)
-    return Response(serializer.data)
-
-@api_view(['GET'])
-def sortByPosition(request, position):
-    """Returns all stats in the database for a given position"""
-    position = Nba_stats.objects.filter(pos=position)
-    serializer = StatsSerializer(position, many=True)
-    return Response(serializer.data)
-
-@api_view(['GET'])
-def sortByTeamScoring(request, team):
-    """Returns all stats in the database for a given team sorted by points per game"""
-    scoring = Nba_stats.objects.filter(team=team).order_by('ppg').reverse()
-    serializer = StatsSerializer(scoring, many=True)
-    return Response(serializer.data)
-
-@api_view(['GET'])
-def sortByFreeThrowAttempts(request):
+def ftAttempts(request):
     """Returns all stats in the database sorted by free throw percentage"""
     fta = Nba_stats.objects.order_by('ft_attempts').reverse()
     serializer = StatsSerializer(fta, many=True)
     return Response(serializer.data)
 
 @api_view(['GET'])
-def sortByFreeThrowPercentage(request):
+def ftPercentage(request):
     """Returns all stats in the database sorted by free throw percentage"""
     ftp = Nba_stats.objects.order_by('ft_percent').reverse()
     serializer = StatsSerializer(ftp, many=True)
     return Response(serializer.data)
 
 @api_view(['GET'])
-def sortByThreePointAttempts(request):
+def threePointAttempts(request):
     """Returns all stats in the database sorted by three point attempts"""
     tpa = Nba_stats.objects.order_by('three_point_attempts').reverse()
     serializer = StatsSerializer(tpa, many=True)
     return Response(serializer.data)
 
 @api_view(['GET'])
-def sortByThreePointPercentage(request):
+def threePointPercentage(request):
     """Returns all stats in the database sorted by three point percentage"""
     tpp = Nba_stats.objects.order_by('three_point_percent').reverse()
     serializer = StatsSerializer(tpp, many=True)
     return Response(serializer.data)
 
 @api_view(['GET'])
-def sortByTwoPointAttempts(request):
+def twoPointAttempts(request):
     """Returns all stats in the database sorted by two point attempts"""
     tpa = Nba_stats.objects.order_by('two_point_attempts').reverse()
     serializer = StatsSerializer(tpa, many=True)
     return Response(serializer.data)
 
 @api_view(['GET'])
-def sortByTwoPointPercentage(request):
+def twoPointPercentage(request):
     """Returns all stats in the database sorted by two point percentage"""
     tpp = Nba_stats.objects.order_by('two_point_percent').reverse()
     serializer = StatsSerializer(tpp, many=True)
     return Response(serializer.data)
 
 @api_view(['GET'])
-def sortByEFGPercentage(request):
+def efgPercentage(request):
     """Returns all stats in the database sorted by effective field goal percentage"""
     efg = Nba_stats.objects.order_by('efg_percent').reverse()
     serializer = StatsSerializer(efg, many=True)
     return Response(serializer.data)
 
 @api_view(['GET'])
-def sortByTSPercentage(request):
+def tsPercentage(request):
     """Returns all stats in the database sorted by true shooting percentage"""
     tsp = Nba_stats.objects.order_by('ts_percent').reverse().exclude(ts_percent=0)
     serializer = StatsSerializer(tsp, many=True)
     return Response(serializer.data)
 
 @api_view(['GET'])
-def sortByOffRating(request):
+def offRating(request):
     """Returns all stats in the database sorted by offensive rating"""
     off_rating = Nba_stats.objects.order_by('off_rating').reverse().exclude(off_rating=0)
     serializer = StatsSerializer(off_rating, many=True)
     return Response(serializer.data)
 
 @api_view(['GET'])
-def sortByDefRating(request):
+def defRating(request):
     """Returns all stats in the database sorted by defensive rating"""
     def_rating = Nba_stats.objects.order_by('def_rating').reverse().exclude(def_rating=0)
     serializer = StatsSerializer(def_rating, many=True)
     return Response(serializer.data)
 
 @api_view(['GET'])
-def sortByTPG(request):
+def turnovers(request):
     """Returns all stats in the database sorted by turnovers per game"""
     tpg = Nba_stats.objects.order_by('tpg').reverse()
     serializer = StatsSerializer(tpg, many=True)

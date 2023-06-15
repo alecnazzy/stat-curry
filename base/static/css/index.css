@@ -12,21 +12,15 @@ main {
 
 /* Index description */
 .description-container {
-
-    /* border: 2px solid red; */
-
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: slategray;
+    background-color: rgb(23, 64, 139);
     color: white;
 }
 
 .description {
-    
-    /* border: 2px solid orange; */
-
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -37,9 +31,6 @@ main {
 
 /* Index API input container */
 .API-input-container {
-    
-        /* border: 2px solid pink; */
-    
         display: flex;
         flex-direction: row;
         justify-content: center;
@@ -76,9 +67,6 @@ main {
 
 /* Index API showcase */
 .API-container {
-
-    /* border: 2px solid blue; */
-
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -87,18 +75,12 @@ main {
 }
 
 .API-url {
-    
-    /* border: solid 2px red; */
-
     border-radius: 15px;
     background-color: rgb(218, 218, 228);
     padding: 10px;
 }
 
 .JSON-container {
-
-    /* border: 2px solid purple; */
-
     display: flex;
     justify-content: center;
     height:500px;

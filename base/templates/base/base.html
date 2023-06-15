@@ -7,15 +7,19 @@
     <title>NBAPI</title>
 
     {% load static %}
-    <link rel="stylesheet" href="{% static 'navbar.css' %}">
-    <link rel="stylesheet" href="{% static 'index.css' %}">
+    <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <link rel="stylesheet" href="{% static 'css/docs.css' %}">
+    <link rel="stylesheet" href="{% static 'css/footer.css' %}">
+    <script src="{% static 'js/index.js' %}"></script>
 
 </head>
 <body>
     
     <nav class="nav-container">
-        <a href="{% url 'base:index' %}">NBAPI</a>
-        <a href="https://github.com/alecnazzy/nbapi" target="_blank">GitHub</a>
+        <a id="nav-link" href="{% url 'base:index' %}">NBAPI</a>
+        <a id="nav-link" href="{% url 'base:docs' %}">Docs</a> 
+        <a id="nav-link" href="https://github.com/alecnazzy/nbapi" target="_blank">GitHub</a>
     </nav>
 
     <main>
@@ -23,6 +27,11 @@
             {% block content %}{% endblock content %}
         </div>
       </main>
+
+    <footer>
+        <p>Created by <a id="footer-link" href="https://github.com/alecnazzy">Alec Nazworth</a></p>
+    </footer>
+
 </body>
 
 </html>

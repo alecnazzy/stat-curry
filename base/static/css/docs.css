@@ -1,0 +1,57 @@
+html, body, main {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+/* Docs page container, holds section and example containers */
+.docs-container {
+    display: flex;
+    flex-direction: row;
+    width: max-content;
+    height: max-content;
+}
+
+/* Section container */
+.section-container {
+    position: fixed;
+    height: 100%;
+    z-index: 1;
+    left: 0;
+}
+.section-container ul {
+    list-style-type: none;
+}
+.section-container a {
+    text-decoration: none;
+}
+
+/* Examples container */
+.examples-container {
+
+}
+h4 {
+    border-radius: 5px;
+    padding: 1px;
+}
+.about-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 500px;
+}
+.example-url {
+    display: flex;
+    flex-direction: row;
+    margin-right: 5px;
+}
+.example-get {
+    background-color: rgb(23, 64, 139);
+    color: white;
+    border-radius: 5px;
+    width: min-content;
+    height: min-content;
+    margin-right: 5px;
+    padding: 3px;
+}

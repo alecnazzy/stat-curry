@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>index</title>
+    <title>NBAPI index</title>
 
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'index.css' %}">
@@ -15,7 +15,7 @@
 <main>
     <div class="description-container">
         <h3 class="description">All the data from the 2022-23 NBA regular season, easily accessible through a RESTful API!</h3>
-        <h1 class="description">Try it out: </h1>
+        <h1 class="description">Try it out!</h1>
     </div>
 
     <div class="API-input-container">
@@ -40,7 +40,6 @@
             async function copyToClipboard() {
                 var _searchField = document.getElementById("searchField");
                 var copiedURL = 'http://127.0.0.1:8000/api/'+_searchField.value;
-
                 navigator.clipboard.writeText(copiedURL);
                 alert("Copied text: " + copiedURL.toString());
             }
@@ -53,6 +52,7 @@
             <pre id="stats"></pre>
         </div> 
     </div>
+
 </main>
 {% endblock content %}
 </body>
