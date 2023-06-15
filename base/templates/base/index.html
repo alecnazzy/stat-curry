@@ -15,10 +15,12 @@
 <main>
     <div class="description-container">
         <h3 class="description">All the data from the 2022-23 NBA regular season, easily accessible through a RESTful API!</h3>
+        <h3 class="description"><a href="https://github.com/alecnazzy/nbapi" target="_blank">GitHub repository</a> </h3>
         <h1 class="description">Try it out!</h1>
     </div>
-
+    
     <div class="API-input-container">
+        
         <h4 class="url">http://127.0.0.1:8000/api/</h4>
         <input id="searchField" name="search" type="text" value="players/Stephen Curry">
             <button id="searchButton" onclick="getStats()">Search</button>
@@ -26,6 +28,7 @@
             <div id="contentArea"></div>
         </input>
     </div>
+    <p>Try <code>http://127.0.0.1:8000/api/</code> for an overview of the API</p>
     
     <div class="API-container">
         <script>

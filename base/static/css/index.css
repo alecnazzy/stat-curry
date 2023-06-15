@@ -28,6 +28,22 @@ main {
     margin-left: 300px;
     margin-right: 300px;
 }
+.description a {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-left: 300px;
+    margin-right: 300px;
+    text-decoration: none;
+    color: white;
+    background-color: rgb(29, 80, 174);
+    border-radius: 10px;
+    padding: 10px;
+}
+.description a:hover {
+    background-color: rgb(40, 92, 188);
+}
 
 /* Index API input container */
 .API-input-container {
@@ -65,6 +81,17 @@ main {
     border-bottom-right-radius: 7px;
 }
 
+p{
+    margin: 0;
+    padding: 0;
+    font-size: 12px;
+    color: rgb(23, 64, 139);
+    font-weight: bold;
+    margin-right: 5px;
+    margin-left: 5px;
+    margin-top: 0px;
+    margin-bottom: 5px;
+}
 /* Index API showcase */
 .API-container {
     display: flex;
