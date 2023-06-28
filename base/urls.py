@@ -9,6 +9,4 @@ app_name = 'base'
 urlpatterns = [
     # Home page
     path('', views.index, name='index'),
-    # Docs page
-    path('docs/', views.docs, name='docs'),
 ]

@@ -1,0 +1,21 @@
+.nav-container {
+
+    /* border: 2px solid green; */
+
+    /* padding: 10px; */
+    display: flex;
+    flex-direction: row;
+    font-size: medium;
+    background-color: rgb(201, 8, 42);
+}
+
+#nav-link {
+    text-decoration: none;
+    font-size: x-large;
+    font-family: monospace;
+    color: white;
+    padding: 10px 30px 10px 30px;
+}
+#nav-link:hover {
+    background-color: rgb(228, 50, 50);
+}

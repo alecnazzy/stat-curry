@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="base/static/js 'self' ">
     <title>NBAPI index</title>
 
     {% load static %}
@@ -19,41 +20,171 @@
         <h1 class="description">Try it out!</h1>
     </div>
     
-    <div class="API-input-container">
-        
-        <h4 class="url">http://127.0.0.1:8000/api/</h4>
-        <input id="searchField" name="search" type="text" value="players/Stephen Curry">
-            <button id="searchButton" onclick="getStats()">Search</button>
-            <button id="copyButton" onclick="copyToClipboard()">Copy</button>
-            <div id="contentArea"></div>
-        </input>
-    </div>
-    <p>Try <code>http://127.0.0.1:8000/api/</code> for an overview of the API</p>
-    
     <div class="API-container">
-        <script>
-            async function getStats() {
-                const _searchField = document.getElementById('searchField');
-                URL = 'http://127.0.0.1:8000/api/'+_searchField.value;
-                const response = await fetch(URL);
-                const data = await response.json();
-                console.log(data);
-                document.getElementById('stats').innerHTML = JSON.stringify(data, null, 2);
-            }
-            async function copyToClipboard() {
-                var _searchField = document.getElementById("searchField");
-                var copiedURL = 'http://127.0.0.1:8000/api/'+_searchField.value;
-                navigator.clipboard.writeText(copiedURL);
-                alert("Copied text: " + copiedURL.toString());
-            }
-            window.onload = function(){
-            document.getElementById('searchButton').click();
-            }
-        </script>
- 
+        <div class="API-input-container">
+            <h4 class="url">http://127.0.0.1:8000/api/</h4>
+            <input id="searchField" name="search" type="text" value="players/Stephen Curry">
+                <button id="searchButton" onclick="getStats(document.getElementById('searchField').value, 'call')">Search</button>
+                <button id="copyButton" onclick="copyToClipboard()">Copy</button>
+                <div id="contentArea"></div>
+            </input>
+        </div>
+        <p>Try <code>http://127.0.0.1:8000/api/</code> for an overview of the API</p>
+
         <div class="JSON-container">
-            <pre id="stats"></pre>
+            <pre id="call"></pre>
         </div> 
+    </div>
+
+
+    <div class="doc-container">
+        <h1 class="description">Other endpoints to try:</h1>
+        <table class="DOC-table">
+            <tr>
+              <th>Endpoint</th>
+              <th>Description</th>
+            </tr>
+            <tr>
+              <td>
+                /api/players
+              </td>
+              <td>Returns all NBA players in alphabetical order.</td>
+            </tr>
+
+            <tr>
+                <td>
+                    /api/players/First Last
+                </td>
+                <td>Returns a specific player.</td>
+            </tr>
+
+            <tr>
+                <td>
+                    /api/teams
+                </td>
+                <td>Returns all NBA teams.</td>
+            </tr>
+
+            <tr>
+                <td>
+                    /api/teams/Team Name
+                </td>
+                <td>Returns a specific team.</td>
+            </tr>
+
+            <tr>
+                <td>
+                    /api/leaders/points
+                </td>
+                <td>Returns leaders in points per game.</td>
+            </tr>
+
+            <tr>
+                <td>
+                    /api/leaders/assists
+                </td>
+                <td>Returns leaders in assists per game.</td>
+            </tr>
+
+            <tr>
+                <td>
+                    /api/leaders/rebounds
+                </td>
+                <td>Returns leaders in rebounds per game.</td>
+            </tr>
+
+            <tr>
+                <td>
+                    /api/leaders/steals
+                </td>
+                <td>Returns leaders in steals per game.</td>
+            </tr>
+
+            <tr>
+                <td>
+                    /api/leaders/blocks
+                </td>
+                <td>Returns leaders in blocks per game.</td>
+            </tr>
+
+            <tr>
+                <td>
+                    /api/leaders/ft
+                </td>
+                <td>Returns leaders in free throw attempts per game.</td>
+            </tr>
+
+            <tr>
+                <td>
+                    /api/leaders/ft%
+                </td>
+                <td>Returns leaders in free throw percentage per game.</td>
+            </tr>
+
+            <tr>
+                <td>
+                    /api/leaders/twopoint
+                </td>
+                <td>Returns leaders in two point attempts per game.</td>
+            </tr>
+
+            <tr>
+                <td>
+                    /api/leaders/twopoint%
+                </td>
+                <td>Returns leaders in two point percentage per game.</td>
+            </tr>
+
+            <tr>
+                <td>
+                    /api/leaders/threepoint
+                </td>
+                <td>Returns leaders in three point attempts per game.</td>
+            </tr>
+
+            <tr>
+                <td>
+                    /api/leaders/threepoint%
+                </td>
+                <td>Returns leaders in three point percentage per game.</td>
+            </tr>
+
+            <tr>
+                <td>
+                    /api/leaders/efg%
+                </td>
+                <td>Returns leaders in effective field goal percentage per game.</td>
+            </tr>
+
+            <tr>
+                <td>
+                    /api/leaders/ts%
+                </td>
+                <td>Returns leaders in true shooting percentage per game.</td>
+            </tr>
+
+            <tr>
+                <td>
+                    /api/leaders/offrating
+                </td>
+                <td>Returns leaders in offensive rating per game.</td>
+            </tr>
+
+            <tr>
+                <td>
+                    /api/leaders/defrating
+                </td>
+                <td>Returns leaders in defensive rating per game.</td>
+            </tr>
+
+            <tr>
+                <td>
+                    /api/leaders/turnovers
+                </td>
+                <td>Returns leaders in turnovers per game.</td>
+            </tr>
+            
+          </table>
     </div>
 
 </main>
